@@ -1,0 +1,36 @@
+<div class="card" style="margin-left: 20%;margin-right: 20%;margin-top: 20px;">
+    <div class="card-header">Contact Details</div>
+    <div class="card-body">
+        <div class='row'>
+            <div class='col-md-10'>
+                <div class='row'>
+                    <div class='col-md-3'>First Name:</div>
+                    <div class='col-md-6'>{{contact.firstName}}</div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-3'>Last Name:</div>
+                    <div class='col-md-6'>{{ contact.lastName }}</div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-3'>Email Address:</div>
+                    <div class='col-md-6'>{{contact.emailId}}</div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-3'>Phone Number:</div>
+                    <div class='col-md-6'>{{contact.phoneNumber}}</div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-3'>Price:</div>
+                    <div class='col-md-6'>{{contact.isActive}}</div>
+                </div>                
+            </div>
+        </div>
+    </div>
+    <div class="card-footer"> <a class='btn btn-sm btn-primary'  style='width:80px' (click)='showList()'>
+         Back
+    </a>
+    <a class="btn btn-sm btn-primary" style="margin-left: 20px; width:80px" (click)='editContact()'>
+        Edit
+    </a>
+    </div>
+  </div>

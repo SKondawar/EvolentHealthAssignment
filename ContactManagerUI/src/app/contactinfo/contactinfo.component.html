@@ -1,0 +1,58 @@
+<div class="wrapper">
+<div class="card" style="width: 100%;">
+    <a [routerLink]="['save',0]" class="btn btn-sm button active" 
+        routerLinkActive ="active" role="button" aria-pressed="true" style="width: 150px;margin-top: 10px;margin-left: 10px;">
+        Add New Contact</a>
+    <div class="card-body">        
+        <!-- <a [routerLink]="['list']" class="btn btn-sm button"  #listLink="routerLinkActive"
+        routerLinkActive="active" role="button" aria-pressed="true" 
+        [class.inactive]="!listLink.isActive">
+            List
+        </a>
+        <a [routerLink]="['save']" class="btn btn-sm button inactive" #addLink="routerLinkActive"
+        routerLinkActive ="active" role="button" aria-pressed="true"
+        [class.inactive]="!addLink.isActive">
+        Add New Contact</a>
+        <router-outlet></router-outlet> -->
+        <div class='table-responsive'>
+            <table class='table'
+                    *ngIf='contacts?.length'>
+                <thead>
+                    <tr>                
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email Address</th>
+                        <th>Phone Number</th>
+                        <th>IsActive</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let contact of contacts'>
+                        <td><a [routerLink]="['details',contact.id]">
+                                {{ contact.firstName }}
+                            </a>
+                        </td>
+                        <td>{{ contact.lastName }}</td>
+                        <td>{{ contact.emailId }}</td>
+                        <td>{{ contact.phoneNumber}}</td>
+                        <td *ngIf="contact.isActive">Active</td>
+                        <td *ngIf="!contact.isActive">InActive</td>
+                        <td>
+                            <!-- <a class="btn btn-primary" 
+                                [routerLink]="['/save']">
+                                Edit
+                            </a> -->
+                            <!-- <button type="submit" class="btn btn-sm btn-primary" style="width: 100px;margin-left: 10px;">Save</button> -->
+                            <a [routerLink]="['save',contact.id]" class="btn btn-sm btn-primary">Edit</a>
+                            <a (click)="delete(contact.id)" class="btn btn-sm btn-danger" style="margin-left: 10px;">Delete</a>
+                        
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <router-outlet></router-outlet>
+</div>
+</div>

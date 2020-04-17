@@ -1,0 +1,72 @@
+
+<!-- <div style="margin-top: 20px;" class="col-md-8 col-md-offset-4">
+    Add New Contact
+    <hr/> -->
+<div class="card m-3">
+  <h4 class="card-header">{{headerText}}</h4>
+  <div class="card-body">
+  <form [formGroup]="contactForm" (ngSubmit)="onSave()">
+      <div class="form-group row">
+        <label for="firstName" class="col-sm-2 col-form-label">First Name</label>
+        <div class="col-sm-4" >
+          <input type="text" class="form-control form-control-sm" formControlName="firstName">
+          <div *ngIf="submitted && cfCtrls.firstName.errors" [ngClass]="{'has-error': (submitted && cfCtrls.firstName.errors)}">
+              <div *ngIf="cfCtrls.firstName.errors.required">First name is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+          <label for="lastName" class="col-sm-2 col-form-label">Last Name</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control form-control-sm" formControlName="lastName">
+            <div *ngIf="submitted && cfCtrls.lastName.errors" [ngClass]="{'has-error': (submitted && cfCtrls.lastName.errors)}">
+                <div *ngIf="cfCtrls.lastName.errors.required">Last name is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="emailId" class="col-sm-2 col-form-label">Email Address</label>
+          <div class="col-sm-4">
+            <input type="email" class="form-control form-control-sm" formControlName="emailId">
+            <div *ngIf="submitted && cfCtrls.emailId.errors" [ngClass]="{'has-error': (submitted && cfCtrls.emailId.errors)}">
+                <div *ngIf="cfCtrls.emailId.errors.required">Email address is required</div>
+                <div *ngIf="cfCtrls.emailId.errors.email">Enter valid email address</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="phone" class="col-sm-2 col-form-label">Phone Number</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control form-control-sm" formControlName="phoneNumber">
+            <div *ngIf="submitted && cfCtrls.phoneNumber.errors" [ngClass]="{'has-error': (submitted && cfCtrls.phoneNumber.errors)}">
+                <div *ngIf="cfCtrls.phoneNumber.errors.required">Phone number is required</div>
+                <div *ngIf="cfCtrls.phoneNumber.errors.minlength || cfCtrls.phoneNumber.errors.maxlength">Enter valid phone number</div>
+            </div>
+          </div>
+        </div>      
+      <div class="form-group row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" formControlName="isActive">
+            <label class="form-check-label" for="gridCheck1">
+              Active
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-10">
+          
+          <a [routerLink]="['contactinfo']" class="btn btn-sm btn-primary" 
+          routerLinkActive ="active" role="button" aria-pressed="true" style="width: 100px;margin-left: 10px;">
+          Back</a>
+          <button type="submit" class="btn btn-sm btn-primary" style="width: 100px;margin-left: 10px;">Save</button>
+          <button class="btn btn-sm btn-secondary" type="reset" style="margin-left: 20px;" (click)="onReset()">Cancel</button>
+        </div>
+      
+      </div>
+    </form>
+  </div>
+</div>
+<!-- </div> -->

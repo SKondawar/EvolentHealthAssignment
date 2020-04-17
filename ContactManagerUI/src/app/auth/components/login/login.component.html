@@ -1,0 +1,27 @@
+<div class="wrap">
+    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-header">
+            <h3>Sign In</h3>            
+        </div>
+        <!--Email Input-->
+        <div class="form-group">           
+            <input type="text" formControlName="username" class="form-input" placeholder="Username"
+            [ngClass]="{ 'is-invalid': lfCtrls.username.errors }" />
+            <!-- <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                <div *ngIf="f.username.errors.required">Username is required</div>
+            </div> -->
+        </div>
+        
+        <div class="form-group">
+            <input type="password" formControlName="password" class="form-control" class="form-input" placeholder="Password"
+            [ngClass]="{ 'is-invalid': lfCtrls.password.errors }" />
+            <!-- <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Password is required</div>
+            </div> -->
+        </div>
+        
+        <div class="form-group">
+            <button class="form-button" type="submit">Login</button>
+        </div>        
+    </form>
+</div>
