@@ -28,6 +28,8 @@ export class LoginComponent implements OnInit {
       //     this.router.navigate(['/']);
       // }
       this.globalEventManagerService.setShowToolBarFlag(false);
+      this.authService.setIsUserLoggedIn(false);
+      
   }
 
   ngOnInit() {
