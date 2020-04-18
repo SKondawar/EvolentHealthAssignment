@@ -104,6 +104,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{04dcc4cd-b82b-424a-840e-9b0d6d53d616}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{b5e7e0d9-6feb-43c3-8f00-00c8acb02915}</Project>
       <Name>Models</Name>

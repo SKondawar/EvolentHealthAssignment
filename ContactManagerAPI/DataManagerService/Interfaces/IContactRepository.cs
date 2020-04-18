@@ -1,4 +1,5 @@
-﻿using Models.Models;
+﻿using Common;
+using Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,9 @@ namespace DataManagerService.Interfaces
 {
     public interface IContactRepository
     {
-        IQueryable<ContactInfo> GetAll();
-        ContactInfo Get(int id);
-
-        bool Save(ContactInfo contact);
+        OperationResult<IQueryable<ContactInfo>> GetAll();
+        OperationResult<ContactInfo> Get(int id);
+        Task<OperationResult<bool>> Save(ContactInfo contact);
 
     }
 }

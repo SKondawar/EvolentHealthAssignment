@@ -1,4 +1,6 @@
-﻿using Models.Models;
+﻿using Common;
+using ContactManagerAPI.Helper;
+using Models.Models;
 using ServiceManager.Classes;
 using ServiceManager.Interfaces;
 using System;
@@ -6,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -21,14 +24,16 @@ namespace ContactManager.Controllers
         }
 
         [HttpGet]
-        public IQueryable<ContactInfo> GetAllContacts()
-        {
-            return _contact.GetAll();
+        public ApiCustomResponse<OperationResult<IQueryable<ContactInfo>>> GetAllContacts()
+        {             
+            var  result =  _contact.GetAll();
+            return new ApiCustomResponse<OperationResult<IQueryable<ContactInfo>>>(HttpStatusCode.OK,result);
         }
         [HttpPost]
-        public bool Save(ContactInfo contact)
+        public async Task<ApiCustomResponse<OperationResult<bool>>> Save(ContactInfo contact)
         {
-            return _contact.Save(contact);
+            var result =await _contact.Save(contact);
+            return new ApiCustomResponse<OperationResult<bool>>(HttpStatusCode.OK, result);
         }
     }
 }

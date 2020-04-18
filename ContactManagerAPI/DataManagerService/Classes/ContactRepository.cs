@@ -1,4 +1,5 @@
-﻿using DataManagerService.DataContext;
+﻿using Common;
+using DataManagerService.DataContext;
 using DataManagerService.Interfaces;
 using Models.Models;
 using System;
@@ -18,17 +19,19 @@ namespace DataManagerService.Classes
             _context = context;
         }
 
-        public ContactInfo Get(int id)
+        public OperationResult<ContactInfo> Get(int id)
         {
-            return _context.Contacts.Where(c => c.Id == id)
+            ContactInfo contact = _context.Contacts.Where(c => c.Id == id)
                 .Select(c => new ContactInfo
                 {
                     Id = c.Id
                 })
                 .FirstOrDefault();
+            var operationResult = new OperationResult<ContactInfo>(contact,"sucess");
+            return operationResult;
         }
 
-        public IQueryable<ContactInfo> GetAll()
+        public OperationResult<IQueryable<ContactInfo>> GetAll()
         {
             var contacts = from c in _context.Contacts
                            where c.IsDeleted==false
@@ -41,31 +44,38 @@ namespace DataManagerService.Classes
                                 PhoneNumber = c.PhoneNumber,
                                 IsActive = c.IsActive == false?false:true
                             };
-            return contacts;
-            
+            var operationResult = new OperationResult<IQueryable<ContactInfo>>(contacts, "sucess");
+            return operationResult;
+
         }
 
-        public bool Save(ContactInfo contact)
+        public async Task<OperationResult<bool>> Save(ContactInfo contact)
         {
+            
             if (contact!=null)
             {
+               
                 if (contact.Id == 0)
                 {
                     // Insert new entry
-                    return Insert(contact);
+                    return await Insert(contact);
                 }
                 else if (contact.Id > 0 && !contact.IsDeleted)
                 {
-                    return Update(contact);
+                    return  await Update(contact);
                 }
                 else if (contact.Id > 0 && contact.IsDeleted)
                 {
-                    return Delete(contact);
-                }
+                    return await Delete(contact);
+                }                
+                return null;
             }
-            return false;
+            return new OperationResult<bool>(false, "contact object is null");            
         }
-        private bool Insert(ContactInfo contact)
+
+        #region Private Methods
+       
+        private async Task<OperationResult<bool>> Insert(ContactInfo contact)
         {
             try
             {
@@ -83,8 +93,9 @@ namespace DataManagerService.Classes
                     ModifyBy = 0
                 };
                 _context.Contacts.Add(obj);
-                _context.SaveChanges();
-                return true;
+                await _context.SaveChangesAsync();
+                 var operationResult = new OperationResult<bool>(true, "inserted successfully");
+                return operationResult;
             }
             catch (Exception)
             {
@@ -93,10 +104,12 @@ namespace DataManagerService.Classes
             }
             
         }
-        private bool Update(ContactInfo contact)
+        private async Task<OperationResult<bool>> Update(ContactInfo contact)
         {
             try
             {
+                bool result = false;
+                string strMessage = string.Empty;
                 Contacts obj = _context.Contacts.Where(c => c.Id == contact.Id && c.IsDeleted==false).FirstOrDefault();
                 if (obj !=null)
                 {
@@ -108,12 +121,17 @@ namespace DataManagerService.Classes
                     obj.IsDeleted = contact.IsDeleted;
                     obj.ModifiedOn = DateTime.UtcNow;
                     obj.ModifyBy = 1;
-                    _context.SaveChanges();
-                    return true;
+                    await _context.SaveChangesAsync();
+                    result = true;
+                    strMessage = "updated successfully";
                 }
-
-                return false;
-                
+                else
+                {
+                    result = false;
+                    strMessage = "not found";
+                }
+                var operationResult = new OperationResult<bool>(result, strMessage);
+                return operationResult;
             }
             catch (Exception)
             {
@@ -122,21 +140,38 @@ namespace DataManagerService.Classes
             }
 
         }
-        private bool Delete(ContactInfo contact)
+        private async Task<OperationResult<bool>> Delete(ContactInfo contact)
         {
             try
             {
+                bool result = false;
+                string strMessage = string.Empty;
                 Contacts obj = _context.Contacts.Where(c => c.Id == contact.Id).FirstOrDefault();
                 if (obj != null)
-                {                    
-                    obj.IsDeleted = true;
-                    obj.ModifiedOn = DateTime.UtcNow;
-                    obj.ModifyBy = 1;
-                    _context.SaveChanges();
-                    return true;
+                {
+                    if ((bool)obj.IsDeleted)
+                    {
+                        result = false;
+                        strMessage = "alredy deleted";
+                    }
+                    else
+                    {
+                        obj.IsDeleted = true;
+                        obj.ModifiedOn = DateTime.UtcNow;
+                        obj.ModifyBy = 1;
+                        await _context.SaveChangesAsync();
+                        result = true;
+                        strMessage = "deleted successfully";
+
+                    }
+                }
+                else
+                {
+                    result = false;
+                    strMessage = "not found";
                 }
 
-                return false;
+                return new OperationResult<bool>(result,strMessage);
 
             }
             catch (Exception)
@@ -146,5 +181,8 @@ namespace DataManagerService.Classes
             }
 
         }
+
+        #endregion
+
     }
 }

@@ -222,6 +222,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\ApiCustomResponse.cs" />
     <Compile Include="Helper\LogHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -314,6 +315,10 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{04dcc4cd-b82b-424a-840e-9b0d6d53d616}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataManagerService\DataManagerService.csproj">
       <Project>{c7c5a8a1-893c-403a-ab6d-93a95f2a6a65}</Project>
       <Name>DataManagerService</Name>

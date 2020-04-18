@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContactinfoRoutingModule } from './contactinfo-routing.module';
 import { ContactinfoComponent } from './contactinfo.component';
-import { ContactlistComponent } from './component/contactlist/contactlist.component';
 import { SavecontactComponent } from './component/savecontact/savecontact.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
@@ -14,7 +13,7 @@ import { ContactService } from './services/contact.service';
 import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
-  declarations: [ContactinfoComponent, ContactlistComponent, SavecontactComponent, ContactdetailsComponent],
+  declarations: [ContactinfoComponent, SavecontactComponent, ContactdetailsComponent],
   imports: [
     CommonModule,
     RouterModule,

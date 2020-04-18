@@ -1,4 +1,5 @@
-﻿using DataManagerService.Interfaces;
+﻿using Common;
+using DataManagerService.Interfaces;
 using Models.Models;
 using ServiceManager.Interfaces;
 using System;
@@ -11,24 +12,26 @@ namespace ServiceManager.Classes
 {
     public class ContactService : IContactService
     {
+        
         private readonly IContactRepository _contactRepository;
         public ContactService(IContactRepository contactRepository)
         {
             _contactRepository = contactRepository;
         }
-        public ContactInfo Get(int id)
+
+        public OperationResult<ContactInfo> Get(int id)
         {
-            throw new NotImplementedException();
+            return _contactRepository.Get(id);
         }
 
-        public IQueryable<ContactInfo> GetAll()
+        public OperationResult<IQueryable<ContactInfo>> GetAll()
         {
-            return _contactRepository.GetAll();
+            return  _contactRepository.GetAll();
         }
 
-        public bool Save(ContactInfo contact)
+        public async Task<OperationResult<bool>> Save(ContactInfo contact)
         {
-            return _contactRepository.Save(contact);
+            return await _contactRepository.Save(contact);
         }
     }
 }

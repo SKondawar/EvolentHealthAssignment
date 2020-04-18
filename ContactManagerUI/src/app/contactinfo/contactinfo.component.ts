@@ -4,6 +4,7 @@ import { ContactService } from './services/contact.service';
 import { ContactModel } from './models/contact.model';
 import { NotificationService } from '../shared/services/notification.service';
 import { AppMessages } from '../constants/app.messages';
+import { ApiResponse } from '../shared/response.model';
 
 @Component({
   selector: 'app-contactinfo',
@@ -13,6 +14,7 @@ import { AppMessages } from '../constants/app.messages';
 export class ContactinfoComponent implements OnInit {
 
   contacts:ContactModel[];
+  response:ApiResponse;
   constructor(private router:Router,private contactService:ContactService,private notificationService:NotificationService) { 
     console.log('ContactinfoComponent');
   }
@@ -22,9 +24,10 @@ export class ContactinfoComponent implements OnInit {
   }
   getAllContacts()
   {
-      this.contactService.getContacts().subscribe(contacts=>{   
-        this.contactService.updateContacts(contacts);  
-        this.contacts = contacts;
+      this.contactService.getContacts().subscribe(response=>{   
+          
+        this.contacts = response.result.result;
+        this.contactService.updateContacts(this.contacts);
         console.log(this.contacts);
     });
   }

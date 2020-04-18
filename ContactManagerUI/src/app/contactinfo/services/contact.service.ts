@@ -4,6 +4,7 @@ import { AppEndPoints } from 'src/app/constants/app.endpoints';
 import { HttpService } from 'src/app/shared/services/http.service';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { ContactModel } from '../models/contact.model';
+import { ApiResponse } from 'src/app/shared/response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class ContactService {
   {
     this._contacts.next(contactList);
   }
-  getContacts(): Observable<ContactModel[]>
+  getContacts(): Observable<ApiResponse>
   {
     let url = AppEndPoints.ContactInfoUrls.getContacts;
     return this.httpService.get(url);

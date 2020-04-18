@@ -82,7 +82,12 @@ export class SavecontactComponent implements OnInit {
           if(this.action=='update')
           this.notificationService.showSuccess(AppMessages.Messages.update,'Success');
           else  
+          {
           this.notificationService.showSuccess(AppMessages.Messages.save,'Success');
+          this.submitted = false;
+          this.contactForm.reset();
+        }
+
         }
         else
         {

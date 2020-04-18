@@ -13,6 +13,7 @@ import {MatCardModule} from '@angular/material/card';
 import { ContactinfoModule } from './contactinfo/contactinfo.module';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent,

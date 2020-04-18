@@ -27,10 +27,11 @@ export class LoginComponent implements OnInit {
       // if (this.authenticationService.currentUserValue) {
       //     this.router.navigate(['/']);
       // }
+      this.globalEventManagerService.setShowToolBarFlag(false);
   }
 
   ngOnInit() {
-
+      
       this.loginForm = this.formBuilder.group({
           username : ['admin',Validators.required],
           password : ['admin',Validators.required]

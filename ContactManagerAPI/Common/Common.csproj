@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E5C48470-449B-4B53-BE53-51AD26EAD6D5}</ProjectGuid>
+    <ProjectGuid>{04DCC4CD-B82B-424A-840E-9B0D6D53D616}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ServiceManager</RootNamespace>
-    <AssemblyName>ServiceManager</AssemblyName>
+    <RootNamespace>Common</RootNamespace>
+    <AssemblyName>Common</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,23 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Classes\ContactService.cs" />
-    <Compile Include="Interfaces\IContactService.cs" />
+    <Compile Include="OperationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{04dcc4cd-b82b-424a-840e-9b0d6d53d616}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataManagerService\DataManagerService.csproj">
-      <Project>{c7c5a8a1-893c-403a-ab6d-93a95f2a6a65}</Project>
-      <Name>DataManagerService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{b5e7e0d9-6feb-43c3-8f00-00c8acb02915}</Project>
-      <Name>Models</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
